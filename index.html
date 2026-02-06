@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Évaluation – IA Générative</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        nav {
+            max-width: 1000px;
+            margin: 0 auto 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 15px 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: #667eea;
+            text-decoration: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        nav a:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        nav a.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+        }
+        
+        h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        h3 {
+            color: #764ba2;
+            font-size: 1.4em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        
+        h4 {
+            color: #555;
+            font-size: 1.1em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .rules-box {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .rules-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .rules-box li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .rules-box li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .exercise {
+            background: #fff;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .exercise:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+        
+        .exercise-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .context-box {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .products-list {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .constraints-box {
+            background: #f8d7da;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .deliverables-box {
+            background: #d4edda;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+        
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .exercise {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="active">Évaluation IA Générative</a>
+        <a href="projet-marque.html">Projet Création de Marque</a>
+    </nav>
+    
+    <div class="container">
+        <header>
+            <h1>Évaluation – IA Générative</h1>
+            <p>Création de visuels promotionnels à partir de briefs clients</p>
+        </header>
+        
+        <div class="content">
+            <div class="section">
+                <h2>Règles générales</h2>
+                <p style="margin-bottom: 15px;">Les règles suivantes s'appliquent aux 3 exercices :</p>
+                <div class="rules-box">
+                    <ul>
+                        <li>Aucune marque réelle.</li>
+                        <li>Aucun texte.</li>
+                        <li>Aucun logo.</li>
+                        <li>Outils IA libres.</li>
+                        <li>Les visuels doivent être présentables à un client sans explication orale.</li>
+                        <li>Chaque exercice doit être accompagné d'une courte note écrite (5 à 10 lignes).</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="exercise">
+                    <span class="exercise-number">EXERCICE 1</span>
+                    <h2>Lancement d'une gamme de soins visage (social media)</h2>
+                    
+                    <h3>Contexte client</h3>
+                    <div class="context-box">
+                        <p>Une jeune marque de cosmétique lance sa première gamme de soins visage, positionnée comme <span class="highlight">moderne, naturelle et premium accessible</span>.</p>
+                    </div>
+                    
+                    <h3>Produits à promouvoir</h3>
+                    <div class="products-list">
+                        <p>La gamme comprend 3 produits :</p>
+                        <ul>
+                            <li>Nettoyant visage</li>
+                            <li>Sérum</li>
+                            <li>Crème hydratante</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>Demande</h3>
+                    <p>Créer <strong>3 visuels promotionnels</strong>, un par produit.</p>
+                    
+                    <h3>Contraintes</h3>
+                    <div class="constraints-box">
+                        <p><strong>Les 3 visuels doivent appartenir clairement à la même marque.</strong></p>
+                        <p style="margin-top: 10px;">Même direction artistique globale :</p>
+                        <ul>
+                            <li>palette chromatique,</li>
+                            <li>lumière,</li>
+                            <li>ambiance,</li>
+                            <li>traitement visuel.</li>
+                        </ul>
+                        <p style="margin-top: 10px;">Chaque visuel doit suggérer la fonction du produit par l'image seule :</p>
+                        <ul>
+                            <li>nettoyant → pureté, fraîcheur,</li>
+                            <li>sérum → précision, concentration,</li>
+                            <li>crème → confort, hydratation.</li>
+                        </ul>
+                        <p style="margin-top: 10px;">Aucun texte, aucun logo.</p>
+                    </div>
+                    
+                    <h3>Livrables</h3>
+                    <div class="deliverables-box">
+                        <ul>
+                            <li>3 visuels finaux cohérents.</li>
+                            <li>1 note d'intention expliquant :
+                                <ul>
+                                    <li>la logique de gamme,</li>
+                                    <li>les choix esthétiques,</li>
+                                    <li>les outils et méthodes utilisés.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <span class="exercise-number">EXERCICE 2</span>
+                    <h2>Série éditoriale avec personnage récurrent</h2>
+                    <h3 style="color: #667eea; margin-top: 0;">Thème : bien-être au travail</h3>
+                    
+                    <h3>Contexte client</h3>
+                    <div class="context-box">
+                        <p>Une plateforme de services souhaite illustrer le thème du <span class="highlight">bien-être au travail</span> pour ses supports éditoriaux.</p>
+                    </div>
+                    
+                    <h3>Demande</h3>
+                    <p>Créer une série de <strong>4 visuels</strong> mettant en scène un même personnage dans les situations suivantes :</p>
+                    <ul>
+                        <li>Concentration</li>
+                        <li>Collaboration</li>
+                        <li>Pause / respiration</li>
+                        <li>Fin de journée</li>
+                    </ul>
+                    
+                    <h3>Contraintes</h3>
+                    <div class="constraints-box">
+                        <ul>
+                            <li>Le personnage doit être reconnaissable sur l'ensemble de la série.</li>
+                            <li>Même style graphique, lumière et palette.</li>
+                            <li>Décors différents mais cohérents.</li>
+                            <li>Chaque image doit transmettre une intention émotionnelle claire.</li>
+                            <li>Aucun texte, aucun logo.</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>Livrables</h3>
+                    <div class="deliverables-box">
+                        <ul>
+                            <li>4 visuels cohérents.</li>
+                            <li>1 court texte expliquant comment la cohérence du personnage et de l'univers a été maintenue.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <span class="exercise-number">EXERCICE 3</span>
+                    <h2>Publicité produit avec narration visuelle (affichage)</h2>
+                    <h3 style="color: #667eea; margin-top: 0;">Produit : Parfum contemporain</h3>
+                    <p style="font-style: italic; color: #666;">Flacon sans marque, sans texte, sans logo.</p>
+                    
+                    <h3>Contexte client</h3>
+                    <div class="context-box">
+                        <p>Une marque fictive de parfum prépare une campagne d'affichage urbain (métro) pour le lancement d'une nouvelle fragrance.</p>
+                        <p style="margin-top: 10px;">Le parfum est positionné comme :</p>
+                        <ul>
+                            <li>contemporain,</li>
+                            <li>élégant,</li>
+                            <li>expressif.</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>Demande</h3>
+                    <p>Créer <strong>2 visuels publicitaires complémentaires</strong> :</p>
+                    <ul>
+                        <li><strong>Visuel A – Parfum + personne</strong><br>
+                            Le parfum est intégré à une scène mettant en avant une personne.</li>
+                        <li><strong>Visuel B – Parfum seul</strong><br>
+                            Un visuel de type packshot expressif, cohérent avec le visuel A.</li>
+                    </ul>
+                    
+                    <h3>Contraintes communes aux deux visuels</h3>
+                    <div class="constraints-box">
+                        <ul>
+                            <li>Format paysage (adapté à l'affichage métro).</li>
+                            <li>Même direction artistique :
+                                <ul>
+                                    <li>lumière,</li>
+                                    <li>ambiance,</li>
+                                    <li>palette,</li>
+                                    <li>traitement visuel.</li>
+                                </ul>
+                            </li>
+                            <li>Aucun texte.</li>
+                            <li>Aucun logo.</li>
+                            <li>Le flacon doit être clairement identifiable.</li>
+                        </ul>
+                    </div>
+                    
+                    <h4>Contraintes spécifiques – Visuel A (Parfum + personne)</h4>
+                    <div class="constraints-box">
+                        <p>Intégrer :</p>
+                        <ul>
+                            <li>le flacon,</li>
+                            <li>une personne,</li>
+                            <li>un décor ou une ambiance signifiante.</li>
+                        </ul>
+                        <p style="margin-top: 10px;">Le visuel doit suggérer une attitude, une émotion ou un moment lié au parfum.</p>
+                        <p>Hiérarchie visuelle claire, lisible à distance.</p>
+                    </div>
+                    
+                    <h4>Contraintes spécifiques – Visuel B (Parfum seul)</h4>
+                    <div class="constraints-box">
+                        <ul>
+                            <li>Le parfum est l'élément central.</li>
+                            <li>Mise en scène soignée, expressive, non neutre.</li>
+                            <li>Le visuel doit prolonger l'univers émotionnel du visuel A sans répéter la scène.</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>Livrables</h3>
+                    <div class="deliverables-box">
+                        <ul>
+                            <li>2 visuels finaux (A et B).</li>
+                            <li>1 note écrite (5 à 10 lignes) précisant :
+                                <ul>
+                                    <li>l'intention créative,</li>
+                                    <li>la relation entre les deux visuels,</li>
+                                    <li>les choix de mise en scène,</li>
+                                    <li>les outils et techniques utilisés.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Document d'évaluation – IA Générative | Création de visuels promotionnels</p>
+        </footer>
+    </div>
+</body>
+</html>

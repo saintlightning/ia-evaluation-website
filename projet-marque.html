@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet – Création de Marque</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        nav {
+            max-width: 1100px;
+            margin: 0 auto 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 15px 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: #667eea;
+            text-decoration: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        nav a:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        nav a.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+        
+        .content {
+            padding: 50px 40px;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+        }
+        
+        h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 4px solid #667eea;
+            display: inline-block;
+        }
+        
+        h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        h4 {
+            color: #555;
+            font-size: 1.2em;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .objective-box {
+            background: #f8f9fa;
+            border-left: 6px solid #667eea;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border: 3px solid #ffc107;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 25px 0;
+            position: relative;
+        }
+        
+        .warning-box::before {
+            content: "⚠️";
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            background: white;
+            padding: 5px 15px;
+            font-size: 1.5em;
+            border-radius: 50%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .warning-box h3 {
+            color: #856404;
+            margin-top: 10px;
+        }
+        
+        .slide-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .slide-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+        
+        .slide-number {
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.1em;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+        }
+        
+        .slide-card h3 {
+            margin-top: 20px;
+            color: #667eea;
+            font-size: 1.6em;
+        }
+        
+        .content-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .content-box h4 {
+            color: #667eea;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .constraints-box {
+            background: #f8d7da;
+            border-left: 5px solid #e74c3c;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .constraints-box h4 {
+            color: #c0392b;
+        }
+        
+        .deliverables-box {
+            background: #d4edda;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .deliverables-box h4 {
+            color: #667eea;
+        }
+        
+        ul {
+            margin-left: 25px;
+            margin-top: 12px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #856404;
+        }
+        
+        .key-requirements {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 40px 0;
+        }
+        
+        .key-requirements h3 {
+            color: white;
+            font-size: 1.8em;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        
+        .key-requirements ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .key-requirements li {
+            padding-left: 30px;
+            position: relative;
+            margin-bottom: 15px;
+        }
+        
+        .key-requirements li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            font-size: 0.95em;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            nav {
+                padding: 15px;
+            }
+            
+            header {
+                padding: 30px 20px;
+            }
+            
+            header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .slide-card {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">Évaluation IA Générative</a>
+        <a href="projet-marque.html" class="active">Projet Création de Marque</a>
+    </nav>
+    
+    <div class="container">
+        <header>
+            <h1>Projet – Création de Marque</h1>
+            <p>Boisson énergisante naturelle</p>
+        </header>
+        
+        <div class="content">
+            <div class="section">
+                <h2>Objectif général</h2>
+                <div class="objective-box">
+                    <p>Créer l'univers visuel complet d'une marque fictive de boisson énergisante naturelle, en démontrant une <strong>forte cohérence graphique</strong>, une <strong>capacité de différenciation</strong> et une <strong>déclinaison maîtrisée</strong> sur plusieurs supports.</p>
+                    <p style="margin-top: 15px;">La marque doit être <span class="highlight">crédible, contemporaine et clairement distincte</span> des codes visuels dominants du marché.</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="warning-box">
+                    <h3>Contrainte majeure de différenciation (obligatoire)</h3>
+                    <p style="margin-top: 15px; font-weight: 500;">La marque doit explicitement se démarquer des références suivantes, sans les citer visuellement ni textuellement :</p>
+                    <ul style="margin-top: 15px;">
+                        <li>univers agressifs ou extrêmes,</li>
+                        <li>couleurs saturées type néon,</li>
+                        <li>imagerie sportive intense ou performance brute,</li>
+                        <li>codes graphiques associés aux boissons énergisantes industrielles.</li>
+                    </ul>
+                    <p style="margin-top: 20px; font-weight: 600; color: #856404;">Le positionnement attendu est celui d'une <strong>énergie naturelle, progressive, saine et quotidienne</strong>.</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 style="display: block; margin-bottom: 40px;">Slides du projet</h2>
+                
+                <div class="slide-card">
+                    <span class="slide-number">SLIDE 1</span>
+                    <h3>Présentation de la marque</h3>
+                    
+                    <div class="content-box">
+                        <h4>Contenu attendu</h4>
+                        <ul>
+                            <li><strong>Nom de la marque</strong></li>
+                            <li><strong>Logo</strong></li>
+                            <li><strong>Positionnement clair</strong> (énergie naturelle, bien-être, concentration, endurance douce, etc.)</li>
+                            <li><strong>Valeurs de la marque</strong></li>
+                            <li><strong>Cible</strong> (profil, âge, mode de vie, contexte de consommation)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="constraints-box">
+                        <h4>Exigence</h4>
+                        <p>Le positionnement doit justifier les choix visuels de l'ensemble du projet.</p>
+                    </div>
+                </div>
+                
+                <div class="slide-card">
+                    <span class="slide-number">SLIDE 2</span>
+                    <h3>Moodboard de l'univers de marque</h3>
+                    
+                    <div class="content-box">
+                        <h4>Contenu attendu</h4>
+                        <ul>
+                            <li>Ambiances visuelles</li>
+                            <li>Palette chromatique</li>
+                            <li>Matières et textures</li>
+                            <li>Références de lumière</li>
+                            <li>Inspirations graphiques et photographiques</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="deliverables-box">
+                        <h4>Objectif</h4>
+                        <p>Rendre immédiatement lisible l'univers émotionnel et esthétique de la marque, en lien avec la contrainte de différenciation.</p>
+                    </div>
+                </div>
+                
+                <div class="slide-card">
+                    <span class="slide-number">SLIDE 3</span>
+                    <h3>Packshot produit n°1</h3>
+                    
+                    <div class="content-box">
+                        <h4>Produit</h4>
+                        <p>Boisson naturelle – <strong>Variante 1</strong> (saveur ou fonction au choix)</p>
+                    </div>
+                    
+                    <div class="constraints-box">
+                        <h4>Contraintes</h4>
+                        <ul>
+                            <li>Format <strong>3:2</strong></li>
+                            <li>Canette ou bouteille clairement lisible</li>
+                            <li>Mise en scène professionnelle</li>
+                            <li>Logo visible</li>
+                            <li>Aucun texte additionnel</li>
+                            <li>Esthétique cohérente avec le moodboard</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="slide-card">
+                    <span class="slide-number">SLIDE 4</span>
+                    <h3>Packshot produit n°2</h3>
+                    
+                    <div class="content-box">
+                        <h4>Produit</h4>
+                        <p>Boisson naturelle – <strong>Variante 2</strong> (différente de la première)</p>
+                    </div>
+                    
+                    <div class="constraints-box">
+                        <h4>Contraintes</h4>
+                        <ul>
+                            <li>Même format <strong>3:2</strong></li>
+                            <li>Même identité de marque</li>
+                            <li>Différenciation visible entre les deux produits (couleur, détail graphique, ambiance)</li>
+                            <li>Cohérence globale maintenue</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="slide-card">
+                    <span class="slide-number">SLIDE 5</span>
+                    <h3>Affiche publicitaire (produit consommé)</h3>
+                    
+                    <div class="content-box">
+                        <h4>Demande</h4>
+                        <p>Créer une affiche <strong>format paysage</strong> mettant en scène la marque dans un contexte de consommation.</p>
+                    </div>
+                    
+                    <div class="constraints-box">
+                        <h4>Contraintes</h4>
+                        <p><strong>Intégrer :</strong></p>
+                        <ul>
+                            <li>une personne,</li>
+                            <li>au moins un des deux produits,</li>
+                            <li>le logo,</li>
+                            <li>un slogan court.</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>La scène doit traduire :</strong></p>
+                        <ul>
+                            <li>une énergie naturelle,</li>
+                            <li>un moment de vie crédible,</li>
+                            <li>une attitude en cohérence avec le positionnement.</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>Exigences techniques :</strong></p>
+                        <ul>
+                            <li>Lisibilité à distance.</li>
+                            <li>Hiérarchie visuelle maîtrisée.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="slide-card">
+                    <span class="slide-number">SLIDE 6</span>
+                    <h3>Réseaux sociaux</h3>
+                    
+                    <div class="deliverables-box">
+                        <h4>Livrables</h4>
+                        <p><strong>2 posts image</strong> destinés aux réseaux sociaux (formats au choix mais cohérents).</p>
+                    </div>
+                    
+                    <div class="constraints-box">
+                        <h4>Contraintes</h4>
+                        <p>Les posts doivent :</p>
+                        <ul>
+                            <li>appartenir clairement à la même marque,</li>
+                            <li>exploiter l'univers défini précédemment,</li>
+                            <li>mettre en avant les produits sans sur-explication.</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>Restrictions :</strong></p>
+                        <ul>
+                            <li>Pas de texte promotionnel long.</li>
+                            <li>Logo autorisé.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="key-requirements">
+                    <h3>Exigence clé du projet</h3>
+                    <p style="font-size: 1.1em; margin-bottom: 20px;">Cohérence graphique totale :</p>
+                    <ul>
+                        <li>palette,</li>
+                        <li>typographie,</li>
+                        <li>lumière,</li>
+                        <li>ambiance,</li>
+                        <li>traitement visuel.</li>
+                    </ul>
+                    <p style="font-size: 1.15em; margin-top: 25px; font-weight: 600;">La marque doit être identifiable même sans lire le nom.</p>
+                    <p style="font-size: 1.1em; margin-top: 20px;">Les deux produits doivent fonctionner :</p>
+                    <ul>
+                        <li>individuellement,</li>
+                        <li>et comme une gamme cohérente.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Projet de création de marque – Boisson énergisante naturelle</p>
+        </footer>
+    </div>
+</body>
+</html>
